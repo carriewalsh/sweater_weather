@@ -12,8 +12,8 @@ class CurrentService
   end
 
   def create_or_update
-    current = CityCurrent.where(city_id: @city.id)
-    unless current.empty?
+    current = CityCurrent.where(city_id: @city.id).first
+    unless current.nil?
       update
     else
       create

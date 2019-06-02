@@ -19,6 +19,7 @@ describe City, type: :model do
     before :each do
       @city = City.create!(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123")
     end
+
     describe "coordinates" do
       it "should return a string of both lat/long coordinates" do
         result = @city.coordinates
@@ -30,6 +31,14 @@ describe City, type: :model do
       it "should return a string of the city and state" do
         result = @city.name_string
         expect(result).to eq("Salem, Oregon")
+      end
+    end
+
+    describe "add_photo" do
+      it "should add a photo relationship for city" do
+        expect(@city.photo).to eq(nil)
+        @city.add_photo
+        expect(City.first.photo).to_not eq(nil)
       end
     end
   end

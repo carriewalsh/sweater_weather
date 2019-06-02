@@ -1,12 +1,9 @@
 class Api::V1::ForecastsController < ApplicationController
   def show
     city = CityCreatorService.new(city_params).find_or_create_city
-    render json: {
-      city: CitySerializer.new(city),
-      current: CityCurrentSerializer.new(CurrentService.new(city).create_or_update),
-      steady: CitySteadySerializer.new(SteadyService.new(city).create_or_update),
-      forecast: CityDaySerializer.new(CityDayService.new(city).create_or_update)
-    }
+    render json: CitySerializer.new(city, {
+      include: [:city_steadies, :city_days, :city_current, :photo]
+      })
   end
 
   private
