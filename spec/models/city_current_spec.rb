@@ -15,5 +15,6 @@ describe CityCurrent, type: :model do
     it { should validate_presence_of :uv_index }
     it { should validate_presence_of :wind_speed }
     it { should validate_presence_of :wind_direction }
+    it { should validate_presence_of :summary }
   end
 end

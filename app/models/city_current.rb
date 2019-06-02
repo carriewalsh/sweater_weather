@@ -7,7 +7,8 @@ class CityCurrent < ApplicationRecord
                         :visibility,
                         :uv_index,
                         :wind_speed,
-                        :wind_direction
+                        :wind_direction,
+                        :summary
 
   belongs_to :city
 end

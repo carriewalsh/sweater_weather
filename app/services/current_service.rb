@@ -40,7 +40,8 @@ class CurrentService
         visibility: data[:visibility],
         uv_index: data[:uvIndex],
         wind_speed: data[:windSpeed],
-        wind_direction: data[:windBearing])
+        wind_direction: data[:windBearing],
+        summary: data[:summary])
     end
 
     def update
@@ -54,6 +55,7 @@ class CurrentService
       visibility: data[:visibility],
       uv_index: data[:uvIndex],
       wind_speed: data[:windSpeed],
-      wind_direction: data[:windBearing])
+      wind_direction: data[:windBearing],
+      summary: data[:summary])
     end
 end

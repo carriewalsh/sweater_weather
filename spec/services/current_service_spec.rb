@@ -28,7 +28,7 @@ describe CurrentService, type: :service do
         expect(CityCurrent.count).to eq(0)
         @current_service.create_or_update
 
-        expect(CityCurrent.first.temp).to eq(@data[:temperature])
+        expect(CityCurrent.first.temp.round(2)).to eq(@data[:temperature].round(2))
         expect(CityCurrent.first.summary).to eq(@data[:summary])
         expect(CityCurrent.first.cloud_cover).to eq(@data[:cloudCover])
       end
@@ -43,14 +43,15 @@ describe CurrentService, type: :service do
                             visibility: 2,
                             uv_index: 1.2,
                             wind_speed: 2,
-                            wind_direction: 123)
+                            wind_direction: 123,
+                            summary: "blah")
         expect(CityCurrent.count).to eq(1)
         expect(CityCurrent.first.temp.round(2)).to eq(1)
         expect(CityCurrent.first.uv_index).to eq(1.2)
 
         @current_service.create_or_update
         expect(CityCurrent.count).to eq(1)
-        expect(CityCurrent.first.temp.round(2)).to eq(@data[:temperature])
+        expect(CityCurrent.first.temp.round(2)).to eq(@data[:temperature].round(2))
         expect(CityCurrent.first.uv_index).to eq(@data[:uvIndex])
       end
     end
