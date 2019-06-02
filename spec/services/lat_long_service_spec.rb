@@ -15,8 +15,8 @@ describe LatLongService, type: :service do
     describe "get_lat_long" do
       it "gets the latitude and longitude for a location" do
         result = @lat_long_service.get_lat_long
-        expect(result.lat).to eq(@lat)
-        expect(result.long).to eq(@long)
+        expect(result[:lat]).to eq(@lat)
+        expect(result[:lng]).to eq(@long)
       end
     end
 
