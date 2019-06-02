@@ -3,6 +3,8 @@ class City < ApplicationRecord
 
   has_many :city_days
   has_many :city_steadies
+  has_many :user_cities
+  has_many :users, through: :user_cities
   has_one :city_current
   has_one :photo
 
