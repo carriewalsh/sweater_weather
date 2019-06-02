@@ -1,11 +1,11 @@
 class CitySteadySerializer
   include FastJsonapi::ObjectSerializer
-  attributes  :sunrise,
+  attributes  :id,
+              :city_id,
+              :day_id,
+              :sunrise,
               :sunset,
               :moon_phase,
               :phase_description,
               :phase_icon
-
-  belongs_to :city
-  belongs_to :day
 end

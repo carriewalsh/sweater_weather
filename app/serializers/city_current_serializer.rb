@@ -1,6 +1,8 @@
 class CityCurrentSerializer
   include FastJsonapi::ObjectSerializer
-  attributes  :temp,
+  attributes  :id,
+              :city_id,
+              :temp,
               :apparent,
               :icon,
               :cloud_cover,
@@ -11,5 +13,4 @@ class CityCurrentSerializer
               :wind_direction,
               :summary
 
-  belongs_to :city
 end
