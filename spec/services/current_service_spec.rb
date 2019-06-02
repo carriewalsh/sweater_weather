@@ -2,33 +2,35 @@ require "rails_helper"
 
 describe CurrentService, type: :service do
   before :each do
-    @city = City.create(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
-    @current_service = CityDayService.new(@city)
-
+    @city = City.create!(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
+    @current_service = CurrentService.new(@city)
     @lat_long_service = LatLongService.new(@city)
     coordinates = @lat_long_service.combine
 
-    weather_url = "https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{coordinates}?exclude=currently,minutesly,hourly,alerts,flags"
+    weather_url = "https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{coordinates}?exclude=daily,minutesly,hourly,alerts,flags"
     actual_weather = Faraday.get(weather_url)
     @data = JSON.parse(actual_weather.body, symbolize_names: true)[:currently]
   end
 
-  describe "instance methods" do
+  describe "Instance methods" do
     describe "get_current" do
-      result = @current_service.get_current
-      expect(result.class).to eq(Hash)
-      expect(result[:temperature]).to eq(@data[:temperature])
-      expect(result[:summary]).to eq(@data[:summary])
-      expect(result[:cloudCover]).to eq(@data[:cloudCover])
+      it "gets current weather data" do
+        result = @current_service.get_current
+        expect(result.class).to eq(Hash)
+        expect(result[:temperature]).to eq(@data[:temperature])
+        expect(result[:summary]).to eq(@data[:summary])
+        expect(result[:cloudCover]).to eq(@data[:cloudCover])
+      end
     end
 
     describe "create_or_update" do
       it "creates city_current if it doesn't exist" do
         expect(CityCurrent.count).to eq(0)
         @current_service.create_or_update
-        expect(CityCurrent.temp).to eq(@data[:temperature])
-        expect(CityCurrent.summary).to eq(@data[:summary])
-        expect(CityCurrent.cloud_cover).to eq(@data[:cloudCover])
+
+        expect(CityCurrent.first.temp).to eq(@data[:temperature])
+        expect(CityCurrent.first.summary).to eq(@data[:summary])
+        expect(CityCurrent.first.cloud_cover).to eq(@data[:cloudCover])
       end
 
       it "updates city_current if it exists" do
@@ -43,13 +45,13 @@ describe CurrentService, type: :service do
                             wind_speed: 2,
                             wind_direction: 123)
         expect(CityCurrent.count).to eq(1)
-        expect(CityCurrent.temp).to eq(1)
-        expect(CityCurrent.uv_index).to eq(1.2)
+        expect(CityCurrent.first.temp.round(2)).to eq(1)
+        expect(CityCurrent.first.uv_index).to eq(1.2)
 
         @current_service.create_or_update
         expect(CityCurrent.count).to eq(1)
-        expect(CityCurrent.temp).to eq(@data[:temperature])
-        expect(CityCurrent.uv_index).to eq(@data[:uvIndex])
+        expect(CityCurrent.first.temp.round(2)).to eq(@data[:temperature])
+        expect(CityCurrent.first.uv_index).to eq(@data[:uvIndex])
       end
     end
   end
