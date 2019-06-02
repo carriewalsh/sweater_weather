@@ -4,12 +4,8 @@ describe CurrentService, type: :service do
   before :each do
     @city = City.create!(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
     @current_service = CurrentService.new(@city)
-    @lat_long_service = LatLongService.new(@city.name + ' ' + @city.state)
-    coordinates = @lat_long_service.combine
 
-    weather_url = "https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{coordinates}?exclude=daily,minutesly,hourly,alerts,flags"
-    actual_weather = Faraday.get(weather_url)
-    @data = JSON.parse(actual_weather.body, symbolize_names: true)[:currently]
+    @data = @current_service.get_json[:currently]
   end
 
   describe "Instance methods" do
