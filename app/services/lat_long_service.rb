@@ -1,7 +1,7 @@
 class LatLongService
 
-  def initialize(city)
-    @city = city
+  def initialize(input)
+    @input = input
   end
 
   def get_lat_long
@@ -17,8 +17,7 @@ class LatLongService
   private
 
     def conn
-      place = @city.name + ' ' + @city.state
-      Faraday.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{place}n&key=#{ENV['GOOGLE_SECRET_KEY']}")
+      Faraday.get("https://maps.googleapis.com/maps/api/geocode/json?address=#{@input}n&key=#{ENV['GOOGLE_SECRET_KEY']}")
     end
 
     def get_json
