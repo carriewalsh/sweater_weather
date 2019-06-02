@@ -4,7 +4,7 @@ describe City, type: :model do
   describe "Relationships" do
     it { should have_many :city_days }
     it { should have_many :city_steadies }
-    it { should have_one :city_currents }
+    it { should have_one :city_current }
   end
 
   describe "Validations" do
