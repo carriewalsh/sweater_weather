@@ -4,4 +4,12 @@ class City < ApplicationRecord
   has_many :city_days
   has_many :city_steadies
   has_one :city_current
+
+  def coordinates
+    latitude + ',' + longitude
+  end
+
+  def name_string
+    name + ', ' + state
+  end
 end

@@ -17,7 +17,7 @@ describe City, type: :model do
 
   describe "Instance methods" do
     before :each do
-      @city = City.create(name: "Salem", state: "Oregon", latitude: "44.07", longitude:" -123", photo_url: "a url")
+      @city = City.create!(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123", photo_url: "a url")
     end
     describe "coordinates" do
       it "should return a string of both lat/long coordinates" do
