@@ -5,6 +5,7 @@ describe City, type: :model do
     it { should have_many :city_days }
     it { should have_many :city_steadies }
     it { should have_one :city_current }
+    it { should have_one :photo }
   end
 
   describe "Validations" do
@@ -12,12 +13,11 @@ describe City, type: :model do
     it { should validate_presence_of :state }
     it { should validate_presence_of :latitude }
     it { should validate_presence_of :longitude }
-    it { should validate_presence_of :photo_url }
   end
 
   describe "Instance methods" do
     before :each do
-      @city = City.create!(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123", photo_url: "a url")
+      @city = City.create!(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123")
     end
     describe "coordinates" do
       it "should return a string of both lat/long coordinates" do

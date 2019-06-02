@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe CurrentService, type: :service do
   before :each do
-    @city = City.create!(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
+    @city = City.create!(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123)
     @current_service = CurrentService.new(@city)
 
     @data = @current_service.get_json[:currently]

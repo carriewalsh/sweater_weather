@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe CityDayService, type: :service do
   before :each do
-    @city = City.create(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
+    @city = City.create(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123)
     @city_day_service = CityDayService.new(@city)
 
     @data = @city_day_service.get_json[:daily][:data][0,7]

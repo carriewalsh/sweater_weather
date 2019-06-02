@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe SteadyService, type: :service do
   before :each do
-    @city = City.create(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
+    @city = City.create(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123)
     @steady_service = SteadyService.new(@city)
 
     @data = @steady_service.get_json[:astronomy][:astronomy][0,7]

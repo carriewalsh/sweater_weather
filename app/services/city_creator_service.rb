@@ -12,7 +12,7 @@ class CityCreatorService
     city = get_city
     state = get_state
     if City.where(name: city, state: state).empty?
-      City.create!(name: city, state: state, latitude: @latlong.split(",")[0], longitude: @latlong.split(",")[1], photo_url: "NOTHING RIGHT NOW")
+      City.create!(name: city, state: state, latitude: @latlong.split(",")[0], longitude: @latlong.split(",")[1])
     else
       City.where(name: city, state: state)
     end

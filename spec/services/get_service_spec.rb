@@ -3,7 +3,7 @@ require "rails_helper"
 describe "GetService", type: :module do
   describe "Instance methods" do
     before :each do
-      @city = City.create(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123", photo_url: "a url")
+      @city = City.create(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123")
       @steady_service = SteadyService.new(@city)
       @city_day_service = CityDayService.new(@city)
       @current_service = CurrentService.new(@city)

@@ -1,6 +1,6 @@
 class CitySerializer
   include FastJsonapi::ObjectSerializer
-  attributes :name, :state, :latitude, :longitude, :photo_url
+  attributes :name, :state, :latitude, :longitude
 
   has_many :city_steadies
   has_many :city_days
