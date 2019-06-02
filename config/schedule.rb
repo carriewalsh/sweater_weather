@@ -5,7 +5,6 @@
 
 # Example:
 #
-# set :output, "/path/to/my/cron_log.log"
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
@@ -19,6 +18,8 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :output, "/log/whenever.log"
+
 set :chronic_options, hours24: true
 
 every :sunday, at: '3am' do
@@ -28,9 +29,9 @@ every :sunday, at: '3am' do
 end
 
 every 1.day, at '3am' do
-  rake 'city_days:update'
+  rake 'update:city_days'
 end
 
-# every 1.hour do
-#   rake 'currents:update'
-# end
+every 15.min do
+  rake 'update:currents'
+end
