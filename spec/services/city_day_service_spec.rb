@@ -4,13 +4,11 @@ describe CityDayService, type: :service do
   before :each do
     @city = City.create(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
     @city_day_service = CityDayService.new(@city)
-    geo_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{@city.name + ' ' + @city.state}n&key=#{ENV['GOOGLE_SECRET_KEY']}"
-    actual_geo = Faraday.get(geo_url)
-    geo_results = JSON.parse(actual_geo.body, symbolize_names: true)[:results].first[:geometry][:location]
-    lat = geo_results[:lat]
-    long = geo_results[:lng]
 
-    weather_url = "https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{lat},#{long}?exclude=currently,minutesly,hourly,alerts,flags&time=#{Time.now.to_f.round}"
+    @lat_long_service = LatLongService.new(@city)
+    coordinates = @lat_long_service.combine
+
+    weather_url = "https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{coordinates}?exclude=currently,minutesly,hourly,alerts,flags&time=#{Time.now.to_f.round}"
     actual_weather = Faraday.get(weather_url)
     @body = JSON.parse(actual_weather.body, symbolize_names: true)[:daily][:data][0,7]
   end
