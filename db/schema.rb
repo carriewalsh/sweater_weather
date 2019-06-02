@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_01_233840) do
+ActiveRecord::Schema.define(version: 2019_06_02_001041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 2019_06_01_233840) do
     t.string "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo_url"
+    t.index ["latitude"], name: "index_cities_on_latitude"
+    t.index ["longitude"], name: "index_cities_on_longitude"
   end
 
   create_table "city_currents", force: :cascade do |t|
@@ -34,6 +37,14 @@ ActiveRecord::Schema.define(version: 2019_06_01_233840) do
     t.decimal "uv_index"
     t.decimal "wind_speed"
     t.decimal "wind_direction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "days", force: :cascade do |t|
+    t.string "name"
+    t.string "abbreviation"
+    t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
