@@ -43,6 +43,6 @@ class CityCreatorService
     end
 
     def get_photo
-      FlickrService.new(@city).get_photo
+      PhotoService.new(@city).get_photo
     end
 end

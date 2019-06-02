@@ -1,4 +1,4 @@
-class FlickrService
+class PhotoService
   include GetService
   attr_reader :url
 
