@@ -1,6 +1,11 @@
 class Api::V1::ForecastsController < ApplicationController
   def show
     city = CityCreatorService.new(city_params).find_or_create_city
+    if city.city_steadies.nil?
+      CurrentService.new(city).create_or_update
+      CityDayService.new(city).create_or_update
+      SteadyService.new(city).create_or_update
+    end
     render json: CitySerializer.new(city, {
       include: [:city_steadies, :city_days, :city_current, :photo]
       })
