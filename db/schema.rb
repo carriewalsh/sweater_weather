@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_174741) do
+ActiveRecord::Schema.define(version: 2019_06_02_222729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,9 +86,27 @@ ActiveRecord::Schema.define(version: 2019_06_02_174741) do
     t.index ["city_id"], name: "index_photos_on_city_id"
   end
 
+  create_table "user_cities", force: :cascade do |t|
+    t.bigint "city_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_user_cities_on_city_id"
+    t.index ["user_id"], name: "index_user_cities_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "city_days", "cities"
   add_foreign_key "city_days", "days"
   add_foreign_key "city_steadies", "cities"
   add_foreign_key "city_steadies", "days"
   add_foreign_key "photos", "cities"
+  add_foreign_key "user_cities", "cities"
+  add_foreign_key "user_cities", "users"
 end
