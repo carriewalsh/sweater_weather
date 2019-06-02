@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_001213) do
+ActiveRecord::Schema.define(version: 2019_06_02_002101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,20 @@ ActiveRecord::Schema.define(version: 2019_06_02_001213) do
     t.index ["city_id"], name: "index_city_currents_on_city_id"
   end
 
+  create_table "city_steadies", force: :cascade do |t|
+    t.bigint "city_id"
+    t.bigint "day_id"
+    t.datetime "sunset"
+    t.datetime "sunrise"
+    t.decimal "moon_phase"
+    t.string "phase_description"
+    t.string "phase_icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_city_steadies_on_city_id"
+    t.index ["day_id"], name: "index_city_steadies_on_day_id"
+  end
+
   create_table "days", force: :cascade do |t|
     t.string "name"
     t.string "abbreviation"
@@ -51,4 +65,6 @@ ActiveRecord::Schema.define(version: 2019_06_02_001213) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "city_steadies", "cities"
+  add_foreign_key "city_steadies", "days"
 end
