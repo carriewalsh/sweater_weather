@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_001041) do
+ActiveRecord::Schema.define(version: 2019_06_02_001213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2019_06_02_001041) do
     t.decimal "wind_direction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "city_id"
+    t.index ["city_id"], name: "index_city_currents_on_city_id"
   end
 
   create_table "days", force: :cascade do |t|
