@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       get '/background', to: 'backgrounds#show'
 
       # get '/register', to: 'users#new'
-      # post '/users', to: 'users#create'
+      post '/users', to: 'users#create'
 
       # get '/login', to: 'sessions#new', as: login
       # post '/login', to: 'sessions#create'

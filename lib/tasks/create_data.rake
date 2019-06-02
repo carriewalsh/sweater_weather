@@ -1,5 +1,5 @@
 namespace :create do
-  describe "rake search for new cities and create data"
+  desc "rake search for new cities and create data"
   task new_data: :environment do
     cities = City.where(city_steadies: nil)
     cities.each do |city|
