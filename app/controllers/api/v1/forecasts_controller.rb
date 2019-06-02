@@ -1,7 +1,6 @@
 class Api::V1::ForecastsController < ApplicationController
   def show
-    coordinates = LatLongService.new(city_params)
-    city = City.find_or_create_by(latitude: coordinates[:lat], longitude: coordinates[:long])
+    city = CityCreatorService.new(city_params).find_or_create_city
   end
 
   private
