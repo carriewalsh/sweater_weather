@@ -3,7 +3,7 @@ require "rails_helper"
 describe LatLongService, type: :service do
   before :each do
     @city = City.create(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
-    @lat_long_service = LatLongService.new(@city)
+    @lat_long_service = LatLongService.new(@city.name + ' ' + @city.state)
     url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{@city.name + ' ' + @city.state}n&key=#{ENV['GOOGLE_SECRET_KEY']}"
     actual_geo = Faraday.get(url)
     results = JSON.parse(actual_geo.body, symbolize_names: true)[:results].first[:geometry][:location]

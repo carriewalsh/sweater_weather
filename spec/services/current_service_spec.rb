@@ -4,7 +4,7 @@ describe CurrentService, type: :service do
   before :each do
     @city = City.create!(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
     @current_service = CurrentService.new(@city)
-    @lat_long_service = LatLongService.new(@city)
+    @lat_long_service = LatLongService.new(@city.name + ' ' + @city.state)
     coordinates = @lat_long_service.combine
 
     weather_url = "https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{coordinates}?exclude=daily,minutesly,hourly,alerts,flags"
@@ -30,7 +30,7 @@ describe CurrentService, type: :service do
 
         expect(CityCurrent.first.temp.round(2)).to eq(@data[:temperature].round(2))
         expect(CityCurrent.first.summary).to eq(@data[:summary])
-        expect(CityCurrent.first.cloud_cover).to eq(@data[:cloudCover])
+        expect(CityCurrent.first.cloud_cover.to_f).to eq(@data[:cloudCover])
       end
 
       it "updates city_current if it exists" do

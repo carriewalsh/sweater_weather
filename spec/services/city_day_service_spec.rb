@@ -5,7 +5,7 @@ describe CityDayService, type: :service do
     @city = City.create(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
     @city_day_service = CityDayService.new(@city)
 
-    @lat_long_service = LatLongService.new(@city)
+    @lat_long_service = LatLongService.new(@city.name + ' ' + @city.state)
     coordinates = @lat_long_service.combine
 
     weather_url = "https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{coordinates}?exclude=currently,minutesly,hourly,alerts,flags&time=#{Time.now.to_f.round}"

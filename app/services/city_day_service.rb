@@ -24,7 +24,7 @@ class CityDayService
   private
 
     def conn
-      coordinates = LatLongService.new(@city).combine
+      coordinates = LatLongService.new(@city.name + ' ' + @city.state).combine
       Faraday.get("https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{coordinates}?exclude=currently,minutesly,hourly,alerts,flags&time=#{Time.now.to_f.round}")
     end
 
