@@ -1,7 +1,10 @@
 class CurrentService
+  include GetService
+  attr_reader :url
 
   def initialize(city)
     @city = city
+    @url = "https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{@city.coordinates}?exclude=daily,minutesly,hourly,alerts,flags"
   end
 
   def get_current
@@ -18,16 +21,6 @@ class CurrentService
   end
 
   private
-
-    def conn
-      coordinates = LatLongService.new(@city.name + ' ' + @city.state).combine
-      Faraday.get("https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{coordinates}?exclude=daily,minutesly,hourly,alerts,flags")
-    end
-
-    def get_json
-      response = conn.body
-      JSON.parse(response, symbolize_names: true)
-    end
 
     def create
       data = get_current

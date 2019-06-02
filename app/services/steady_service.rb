@@ -1,7 +1,10 @@
 class SteadyService
+  include GetService
+  attr_reader :url
 
   def initialize(city)
     @city = city
+    @url = "https://weather.cit.api.here.com/weather/1.0/report.json?name=salem oregon&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg&product=forecast_astronomy"
   end
 
   def get_astros
@@ -21,16 +24,6 @@ class SteadyService
   end
 
   private
-
-    def conn
-      place = @city.name + ' ' + @city.state
-      Faraday.get("https://weather.cit.api.here.com/weather/1.0/report.json?app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg&product=forecast_astronomy&name=#{place}")
-    end
-
-    def get_json
-      response = conn.body
-      JSON.parse(response, symbolize_names: true)
-    end
 
     def create
       data = get_astros
