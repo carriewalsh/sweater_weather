@@ -13,9 +13,9 @@ class CityCreatorService
     state = get_state
     if City.where(name: city, state: state).empty?
       City.create!(name: city, state: state, latitude: @latlong.split(",")[0], longitude: @latlong.split(",")[1])
-    else
-      City.where(name: city, state: state)
+      City.where(name: city, state: state).first.add_photo
     end
+    City.where(name: city, state: state).first
   end
 
   private
@@ -40,5 +40,9 @@ class CityCreatorService
         end
       end
       state
+    end
+
+    def get_photo
+      FlickrService.new(@city).get_photo
     end
 end
