@@ -13,4 +13,9 @@ class City < ApplicationRecord
   def name_string
     name + ', ' + state
   end
+
+  def add_photo
+    data = FlickrService.new(self).get_photo
+    Photo.create(city_id: self.id, owner: data[:owner], secret: data[:secret], server: data[:server], title: data[:title])
+  end
 end
