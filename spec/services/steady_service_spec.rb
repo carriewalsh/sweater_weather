@@ -6,20 +6,20 @@ describe SteadyService, type: :service do
     @steady_service = SteadyService.new(@city)
     url = "https://weather.cit.api.here.com/weather/1.0/report.json?name=salem oregon&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg&product=forecast_astronomy"
     actual = Faraday.get(url)
-    @body = JSON.parse(actual.body, symbolize_names: true)[:astronomy][:astronomy]
+    @data = JSON.parse(actual.body, symbolize_names: true)[:astronomy][:astronomy]
   end
-  
+
   describe 'Instance methods' do
     describe "get_astros" do
       it 'gets weekly sunrise, sunset, moon data' do
         result = @steady_service.get_astros
         expect(result.class).to eq(Array)
         expect(result.first.class).to eq(Hash)
-        expect(result.first[:sunrise]).to eq(@body.first[:sunrise])
-        expect(result.first[:sunset]).to eq(@body.first[:sunset])
-        expect(result.first[:moonPhase]).to eq(@body.first[:moonPhase])
-        expect(result.first[:moonPhaseDesc]).to eq(@body.first[:moonPhaseDesc])
-        expect(result.first[:iconName]).to eq(@body.first[:iconName])
+        expect(result.first[:sunrise]).to eq(@data.first[:sunrise])
+        expect(result.first[:sunset]).to eq(@data.first[:sunset])
+        expect(result.first[:moonPhase]).to eq(@data.first[:moonPhase])
+        expect(result.first[:moonPhaseDesc]).to eq(@data.first[:moonPhaseDesc])
+        expect(result.first[:iconName]).to eq(@data.first[:iconName])
       end
     end
 
@@ -36,11 +36,11 @@ describe SteadyService, type: :service do
 
         @steady_service.create_or_update
         expect(CitySteady.count).to eq(7)
-        expect(CitySteady.first.sunrise).to eq(@body.first[:sunrise])
-        expect(CitySteady.last.sunrise).to eq(@body.last[:sunrise])
+        expect(CitySteady.first.sunrise).to eq(@data.first[:sunrise])
+        expect(CitySteady.last.sunrise).to eq(@data.last[:sunrise])
       end
 
-      it "creates city_steadies in db" do
+      it "updates city_steadies in db" do
         today = Date.today
         count = 0
         while count < 7
@@ -60,8 +60,8 @@ describe SteadyService, type: :service do
 
         @steady_service.create_or_update
         expect(CitySteady.count).to eq(7)
-        expect(CitySteady.first.sunrise).to eq(@body.first[:sunrise])
-        expect(CitySteady.last.sunrise).to eq(@body[6][:sunrise])
+        expect(CitySteady.first.sunrise).to eq(@data.first[:sunrise])
+        expect(CitySteady.last.sunrise).to eq(@data[6][:sunrise])
       end
     end
   end
