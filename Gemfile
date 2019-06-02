@@ -28,6 +28,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'fast_jsonapi'
 gem 'faraday'
+gem 'whenever', require: false
+gem 'csv'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
