@@ -5,12 +5,7 @@ describe CityDayService, type: :service do
     @city = City.create(name: "Salem", state: "Oregon", latitude: 44.07, longitude: -123, photo_url: "a url")
     @city_day_service = CityDayService.new(@city)
 
-    @lat_long_service = LatLongService.new(@city.name + ' ' + @city.state)
-    coordinates = @lat_long_service.combine
-
-    weather_url = "https://api.darksky.net/forecast/#{ENV['DARK_SKY_SECRET_KEY']}/#{coordinates}?exclude=currently,minutesly,hourly,alerts,flags&time=#{Time.now.to_f.round}"
-    actual_weather = Faraday.get(weather_url)
-    @data = JSON.parse(actual_weather.body, symbolize_names: true)[:daily][:data][0,7]
+    @data = @city_day_service.get_json[:daily][:data][0,7]
   end
 
   describe "instance methods" do
