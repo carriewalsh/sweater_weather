@@ -28,7 +28,7 @@ describe SteadyService, type: :service do
         count = 0
         while count < 7
           day = (today + count.days)
-          Day.create(name: day.strftime("%B"), abbreviation: day.strftime("%b"), date: day)
+          Day.create(name: day.strftime("%A"), abbreviation: day.strftime("%a"), date: day)
           count += 1
         end
         expect(CitySteady.count).to eq(0)
@@ -44,7 +44,7 @@ describe SteadyService, type: :service do
         count = 0
         while count < 7
           day = (today + count.days)
-          Day.create(name: day.strftime("%B"), abbreviation: day.strftime("%b"), date: day)
+          Day.create(name: day.strftime("%A"), abbreviation: day.strftime("%a"), date: day)
           CitySteady.create(city_id: @city.id, day_id: Day.find_by(date: day).id,
           sunrise: "1",
           sunset: "2",

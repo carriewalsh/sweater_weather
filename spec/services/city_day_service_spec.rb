@@ -27,7 +27,7 @@ describe CityDayService, type: :service do
         count = 0
         while count < 7
           day = (today + count.days)
-          Day.create(name: day.strftime("%B"), abbreviation: day.strftime("%b"), date: day)
+          Day.create(name: day.strftime("%A"), abbreviation: day.strftime("%a"), date: day)
           count += 1
         end
         expect(CityDay.count).to eq(0)
@@ -43,7 +43,7 @@ describe CityDayService, type: :service do
         count = 0
         while count < 7
           day = (today + count.days)
-          Day.create(name: day.strftime("%B"), abbreviation: day.strftime("%b"), date: day)
+          Day.create(name: day.strftime("%A"), abbreviation: day.strftime("%a"), date: day)
           CityDay.create(city_id: @city.id, day_id: Day.find_by(date: day).id,
           high: 13,
           low: 2.2,
