@@ -47,7 +47,7 @@ class CityDayService
     end
 
     def update(datum)
-      city_day = @city.city_days.where(day_id: Day.find_by(date: datum[:time].to_date).id)
+      city_day = @city.city_days.where(day_id: Day.find_by(date: Time.at(datum[:time]).to_date).id)
       city_day.update(high: datum[:temperatureMax],
                       low: datum[:temperatureMin],
                       icon: datum[:icon],

@@ -57,14 +57,14 @@ describe CityDayService, type: :service do
           summary: "blah")
           count += 1
         end
-        expect(CitySteady.count).to eq(7)
-        expect(CitySteady.first.low).to eq(2.2)
-        expect(CitySteady.last.low).to eq(2.2)
+        expect(CityDay.count).to eq(7)
+        expect(CityDay.first.low).to eq(2.2)
+        expect(CityDay.last.low).to eq(2.2)
 
         @city_day_service.create_or_update
-        expect(CitySteady.count).to eq(7)
-        expect(CitySteady.first.low).to eq(@data.first[:temperatureMin])
-        expect(CitySteady.last.low).to eq(@data[6][:temperatureMin])
+        expect(CityDay.count).to eq(7)
+        expect(CityDay.first.low).to eq(@data.first[:temperatureMin])
+        expect(CityDay.last.low).to eq(@data[6][:temperatureMin])
       end
     end
   end
