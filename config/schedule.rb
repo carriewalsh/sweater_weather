@@ -24,6 +24,7 @@ set :chronic_options, hours24: true
 every :sunday, at: '3am' do
   rake 'update:days'
   rake 'update:steadies'
+  rake 'destroy:days'
 end
 
 every 1.day, at '3am' do

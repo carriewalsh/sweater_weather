@@ -23,4 +23,11 @@ namespace :update do
       CityDayService.new(city).create_or_update
     end
   end
+
+  desc "rake update currents"
+  task city_currents: :environment do
+    City.all.each do |city|
+      CurrentService.new(city).create_or_update
+    end
+  end
 end
