@@ -1,5 +1,5 @@
 class City < ApplicationRecord
-  validates_presence_of :name, :state, :latitude, :longitude
+  validates_presence_of :name, :state, :latitude, :longitude, :photo_url
 
   has_many :city_days
   has_many :city_steadies
