@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_064505) do
+ActiveRecord::Schema.define(version: 2019_06_02_174741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2019_06_02_064505) do
     t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "photo_url"
     t.string "latitude"
     t.string "longitude"
   end
@@ -78,8 +77,18 @@ ActiveRecord::Schema.define(version: 2019_06_02_064505) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "photos", force: :cascade do |t|
+    t.bigint "city_id"
+    t.string "owner"
+    t.string "secret"
+    t.string "server"
+    t.string "title"
+    t.index ["city_id"], name: "index_photos_on_city_id"
+  end
+
   add_foreign_key "city_days", "cities"
   add_foreign_key "city_days", "days"
   add_foreign_key "city_steadies", "cities"
   add_foreign_key "city_steadies", "days"
+  add_foreign_key "photos", "cities"
 end
