@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_002101) do
+ActiveRecord::Schema.define(version: 2019_06_02_002811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,20 @@ ActiveRecord::Schema.define(version: 2019_06_02_002101) do
     t.index ["city_id"], name: "index_city_currents_on_city_id"
   end
 
+  create_table "city_days", force: :cascade do |t|
+    t.bigint "city_id"
+    t.bigint "day_id"
+    t.decimal "high"
+    t.decimal "low"
+    t.string "icon"
+    t.decimal "precip_probability"
+    t.text "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_city_days_on_city_id"
+    t.index ["day_id"], name: "index_city_days_on_day_id"
+  end
+
   create_table "city_steadies", force: :cascade do |t|
     t.bigint "city_id"
     t.bigint "day_id"
@@ -65,6 +79,8 @@ ActiveRecord::Schema.define(version: 2019_06_02_002101) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "city_days", "cities"
+  add_foreign_key "city_days", "days"
   add_foreign_key "city_steadies", "cities"
   add_foreign_key "city_steadies", "days"
 end
