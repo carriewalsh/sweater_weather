@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_002811) do
+ActiveRecord::Schema.define(version: 2019_06_02_005452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,13 +18,11 @@ ActiveRecord::Schema.define(version: 2019_06_02_002811) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "state"
-    t.string "latitude"
-    t.string "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo_url"
-    t.index ["latitude"], name: "index_cities_on_latitude"
-    t.index ["longitude"], name: "index_cities_on_longitude"
+    t.decimal "latitude"
+    t.decimal "longitude"
   end
 
   create_table "city_currents", force: :cascade do |t|
@@ -60,13 +58,13 @@ ActiveRecord::Schema.define(version: 2019_06_02_002811) do
   create_table "city_steadies", force: :cascade do |t|
     t.bigint "city_id"
     t.bigint "day_id"
-    t.datetime "sunset"
-    t.datetime "sunrise"
     t.decimal "moon_phase"
     t.string "phase_description"
     t.string "phase_icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "sunrise"
+    t.string "sunset"
     t.index ["city_id"], name: "index_city_steadies_on_city_id"
     t.index ["day_id"], name: "index_city_steadies_on_day_id"
   end
