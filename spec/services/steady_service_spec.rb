@@ -7,8 +7,8 @@ describe SteadyService, type: :service do
     url = "https://weather.cit.api.here.com/weather/1.0/report.json?name=salem oregon&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg&product=forecast_astronomy"
     actual = Faraday.get(url)
     @body = JSON.parse(actual.body, symbolize_names: true)[:astronomy][:astronomy]
-
   end
+  
   describe 'Instance methods' do
     describe "get_astros" do
       it 'gets weekly sunrise, sunset, moon data' do
