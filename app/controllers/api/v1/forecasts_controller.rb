@@ -3,9 +3,9 @@ class Api::V1::ForecastsController < ApplicationController
     city = CityCreatorService.new(city_params).find_or_create_city
     render json: {
       city: CitySerializer.new(city),
-      current: CityCurrentSerializer.new(CityCurrent.where(city_id: city.id)),
-      steady: CitySteadySerializer.new(CitySteady.where(city_id: city.id)),
-      forecast: CityDaySerializer.new(CityDay.where(city_id: city.id))
+      current: CityCurrentSerializer.new(CurrentService.new(city).create_or_update),
+      steady: CitySteadySerializer.new(SteadyService.new(city).create_or_update),
+      forecast: CityDaySerializer.new(CityDayService.new(city).create_or_update)
     }
   end
 
