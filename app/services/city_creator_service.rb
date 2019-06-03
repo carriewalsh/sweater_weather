@@ -29,9 +29,10 @@ class CityCreatorService
       data = get_json[:results].first[:address_components]
       city = nil
       data.map do |datum|
-        if datum[:types].include?("administrative_area_level_1")
+        if datum[:types].include?("locality")
           city = datum[:long_name]
-        elsif datum[:types].include?("locality")
+          break
+        elsif datum[:types].include?("administrative_area_level_1")
           city = datum[:long_name]
         end
       end
