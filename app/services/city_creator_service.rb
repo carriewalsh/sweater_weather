@@ -41,8 +41,4 @@ class CityCreatorService
       end
       state
     end
-
-    def get_photo
-      PhotoService.new(@city).get_photo
-    end
 end
