@@ -11,4 +11,5 @@ class CityCurrent < ApplicationRecord
                         :summary
 
   belongs_to :city
+  has_one :antipode
 end

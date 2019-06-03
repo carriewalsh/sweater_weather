@@ -12,7 +12,8 @@ class AntipodeService
 
   def create_antipode
     antipode_city = create_or_find_city
-    Antipode.create(search_location: @city.name, city_id: antipode_city.id)
+    CurrentService.new(antipode_city).create_or_update
+    Antipode.create(search_location: @city.name, city_id: antipode_city.id, city_current_id: antipode_city.city_current.id)
   end
 
   def create_or_find_city

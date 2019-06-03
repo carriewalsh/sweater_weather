@@ -38,7 +38,6 @@ describe CitySerializer, type: :serializer do
       serializer = CitySerializer.new(city, {
         include: [:city_steadies, :city_days, :city_current, :photo]
         })
-        binding.pry
     end
   end
 end
