@@ -3,8 +3,12 @@ class CityCreatorService
   attr_reader :url
 
   def initialize(input)
-    @input = input
-    @latlong = LatLongService.new(input).combine
+    if input[0,4].to_i == 0
+      @latlong = LatLongService.new(input).combine
+    else
+      @latlong = input
+    end
+
     @url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=#{@latlong}&key=#{ENV['GOOGLE_SECRET_KEY']}"
   end
 
