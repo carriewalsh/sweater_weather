@@ -4,7 +4,7 @@ class SteadyService
 
   def initialize(city)
     @city = city
-    @url = "https://weather.cit.api.here.com/weather/1.0/report.json?name=salem oregon&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg&product=forecast_astronomy"
+    @url = "https://weather.cit.api.here.com/weather/1.0/report.json?name=#{@city.name_string}&app_id=DemoAppId01082013GAL&app_code=AJKnXv84fjrb0KIHawS0Tg&product=forecast_astronomy"
   end
 
   def get_astros
