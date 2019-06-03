@@ -22,16 +22,17 @@ set :output, "/log/whenever.log"
 
 set :chronic_options, hours24: true
 
-every :sunday, at: '3am' do
+every :sunday, at: '3:00 am' do
   rake 'update:days'
   rake 'update:steadies'
   rake 'destroy:days'
 end
 
-every 1.day, at '3am' do
+every 1.day, at: '3:00 am' do
   rake 'update:city_days'
 end
 
-every 15.min do
+every 15.minutes do
   rake 'update:currents'
+  rake 'create:new_data'
 end
