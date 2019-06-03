@@ -10,8 +10,15 @@ class AntipodeService
     @url = "http://amypode.herokuapp.com/api/v1/antipodes?lat=#{lat}&long=#{long}"
   end
 
-  def get_antipode
-    get_json_headers("api_key", ENV["AMY_KEY"])
-    binding.pry
+  def create_or_find_antipode
+    data = get_antipode
+    latlong = "#{data[:lat]},#{data[:long]}"
+    CityCreatorService.new(latlong).find_or_create_city
   end
+
+  private
+
+    def get_antipode
+      get_json_headers("api_key", ENV["AMY_KEY"])[:data]
+    end
 end
