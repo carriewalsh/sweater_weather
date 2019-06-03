@@ -17,7 +17,7 @@ describe City, type: :model do
 
   describe "Instance methods" do
     before :each do
-      @city = City.create!(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123")
+      @city = City.create(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123")
     end
 
     describe "coordinates" do
