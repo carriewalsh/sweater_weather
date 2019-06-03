@@ -11,11 +11,12 @@ class CityCreatorService
   def find_or_create_city
     city = get_city
     state = get_state
+    country = get_country
     if City.where(name: city, state: state).empty?
-      City.create!(name: city, state: state, latitude: @latlong.split(",")[0], longitude: @latlong.split(",")[1])
-      City.where(name: city, state: state).first.add_photo
+      City.create!(name: city, state: state, country: country, latitude: @latlong.split(",")[0], longitude: @latlong.split(",")[1])
+      City.where(name: city, state: state, country: country).first.add_photo
     end
-    City.where(name: city, state: state).first
+    City.where(name: city, state: state, country: country).first
   end
 
   private
@@ -23,15 +24,15 @@ class CityCreatorService
     def get_city
       data = get_json[:results].first[:address_components]
       city = nil
-      get_country
-      if get_country == "United States"
-        data.map do |datum|
-          if datum[:types].include?("locality")
-            city = datum[:long_name]
-          end
+      data.map do |datum|
+        if datum[:types].include?("administrative_area_level_1")
+          city = datum[:long_name]
+        elsif datum[:types].include?("locality")
+          city = datum[:long_name]
         end
-      else
-        binding.pry
+      end
+      if city.nil?
+        city = data.first[:long_name]
       end
       city
     end
@@ -51,8 +52,8 @@ class CityCreatorService
       data = get_json[:results].first[:address_components]
       country = nil
       data.map do |datum|
-        if datum[:types] == ["country", "political"]
-          country == datum[:long_name]
+        if datum[:types].include?("country")
+          country = datum[:long_name]
         end
       end
       country
