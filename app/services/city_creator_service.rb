@@ -23,10 +23,15 @@ class CityCreatorService
     def get_city
       data = get_json[:results].first[:address_components]
       city = nil
-      data.map do |datum|
-        if datum[:types].include?("locality")
-          city = datum[:long_name]
+      get_country
+      if get_country == "United States"
+        data.map do |datum|
+          if datum[:types].include?("locality")
+            city = datum[:long_name]
+          end
         end
+      else
+        binding.pry
       end
       city
     end
@@ -40,5 +45,16 @@ class CityCreatorService
         end
       end
       state
+    end
+
+    def get_country
+      data = get_json[:results].first[:address_components]
+      country = nil
+      data.map do |datum|
+        if datum[:types] == ["country", "political"]
+          country == datum[:long_name]
+        end
+      end
+      country
     end
 end
