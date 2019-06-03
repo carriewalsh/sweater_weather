@@ -7,6 +7,7 @@ class City < ApplicationRecord
   has_many :users, through: :user_cities
   has_one :city_current
   has_one :photo
+  has_one :antipode
 
   def coordinates
     latitude + ',' + longitude

@@ -6,6 +6,7 @@ describe City, type: :model do
     it { should have_many :city_steadies }
     it { should have_one :city_current }
     it { should have_one :photo }
+    it { should have_one :antipode }
   end
 
   describe "Validations" do
