@@ -22,6 +22,7 @@ describe "As a user" do
         expect(City.first.name).to eq("Salem")
         expect(City.first.state).to eq("Oregon")
         expect(CityCurrent.count).to eq(1)
+        binding.pry
         expect(CityDay.count).to eq(7)
         expect(CitySteady.count).to eq(7)
       end
