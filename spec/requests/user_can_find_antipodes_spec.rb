@@ -5,10 +5,12 @@ describe "As a visitor", type: :request do
     it "should return my weather and the weather of my antipode" do
       get "/api/v1/antipode?loc=hongkong"
 
-      expect(response).to be successful
-      expect(response[:data].first[:type]).to eq("antipode")
-      expect(response[:data].first[:attributes].include?("location_name")).to be true
-      expect(response[:data].first[:attributes].include?("forecast")).to be true
+      # expect(response).to be successful
+      body = JSON.parse(response.body, symbolize_names: true)
+
+      expect(body[:data].first[:type]).to eq("antipode")
+      expect(body[:data].first[:attributes].include?("search_location")).to be true
+      expect(body[:data].first[:attributes].include?("forecast")).to be true
     end
   end
 
