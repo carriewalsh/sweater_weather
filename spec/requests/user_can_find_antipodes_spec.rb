@@ -3,7 +3,18 @@ require "rails_helper"
 describe "As a visitor", type: :request do
   describe "When I enter a city" do
     it "should return my weather and the weather of my antipode" do
-      city = CityCreatorService.new("Hong Kong").find_or_create_city
+      get "/api/v1/antipode?loc=hongkong"
+
+      expect(response).to be successful
+      expect(response[:data].first[:type]).to eq("antipode")
+      expect(response[:data].first[:attributes].include?("location_name")).to be true
+      expect(response[:data].first[:attributes].include?("forecast")).to be true
+    end
+  end
+
+  describe "amypode" do
+    it "returns the lat and long of the antipode" do
+      city = CityCreatorService.new("hongkong").find_or_create_city
       lat = city.latitude
       long = city.longitude
 
@@ -17,7 +28,6 @@ describe "As a visitor", type: :request do
       expect(data[:type]).to eq("antipode")
       expect(data[:attributes].keys.include?(:lat)).to be true
       expect(data[:attributes].keys.include?(:long)).to be true
-
     end
   end
 end
