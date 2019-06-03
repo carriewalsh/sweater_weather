@@ -30,6 +30,7 @@ gem 'fast_jsonapi'
 gem 'faraday'
 gem 'whenever', require: false
 gem 'csv'
+gem 'awesome_print'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
