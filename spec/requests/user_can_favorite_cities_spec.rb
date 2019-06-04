@@ -5,6 +5,7 @@ describe "As a logged-in user" do
     it "I can add them to my favorites" do
       city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
       user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
+      CurrentService.new(city).create_or_update
 
       post("/api/v1/favorites?location=#{city.id}&api_key=12345")
       expect(UserCity.count).to eq(1)

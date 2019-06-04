@@ -4,8 +4,9 @@ class Api::V1::FavoritesController < ApplicationController
   def create
     user = User.find_by(api_key: create_params[:api_key])
     city = City.find(create_params[:location])
+    current = CityCurrent.find_by(city_id: city)
     if user && city
-      UserCity.create(user_id: user.id, city_id: city.id)
+      UserCity.create!(user_id: user.id, city_id: city.id, city_current_id: current.id)
       render json: { success: "Favorited" }, status: 200
     else
       render json: { error: "Unauthorized" }, status: 401
@@ -14,7 +15,7 @@ class Api::V1::FavoritesController < ApplicationController
 
   def show
     user = User.find_by(api_key: create_params[:api_key])
-    favorites = User.cities
+    # favorites = User.cities
     if user
       render json: UserCitySerializer.new(favorites)
     else
