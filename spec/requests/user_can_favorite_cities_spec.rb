@@ -33,11 +33,10 @@ describe "As a logged-in user" do
       get('/api/v1/favorites?api_key=12345')
 
       expect(response.status).to eq(200)
-      data = JSON.parse(response.body, symbolize_names: true).first
-      binding.pry
-      expect(data[:location]).to eq("Salem, Oregon")
-      # expect(data[:current]).to eq()
-      expect(user.cities.count).to eq(1)
+      data = JSON.parse(response.body, symbolize_names: true)[user.email.to_sym][:data]
+      expect(data.count).to eq(2)
+      expect(data.first.keys.first).to eq(:Salem)
+      expect(data.first.values.first.include?(:temp)).to be true
     end
 
     xit "does not let me see my favorite cities without my api key" do
