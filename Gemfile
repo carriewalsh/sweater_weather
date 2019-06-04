@@ -31,6 +31,7 @@ gem 'faraday'
 gem 'whenever', require: false
 gem 'csv'
 gem 'awesome_print'
+gem 'rspec-pride'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
