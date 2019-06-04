@@ -50,7 +50,7 @@ class CityCreatorService
           state = datum[:long_name]
         end
       end
-      state
+      state ? state : ""
     end
 
     def get_country
