@@ -27,7 +27,7 @@ describe "As a logged-in user" do
       city2 = City.create(name: "Eugene", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
       user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
       city_current = CurrentService.new(city).create_or_update
-      UserCity.create!(user_id: user.id, city_id: city.id, city_current_id: city_current.id)
+      UserCity.create(user_id: user.id, city_id: city.id, city_current_id: city_current.id)
       city_current2 = CurrentService.new(city2).create_or_update
       UserCity.create!(user_id: user.id, city_id: city2.id, city_current_id: city_current2.id)
       get('/api/v1/favorites?api_key=12345')
@@ -39,10 +39,11 @@ describe "As a logged-in user" do
       expect(data.first.values.first.include?(:temp)).to be true
     end
 
-    xit "does not let me see my favorite cities without my api key" do
+    it "does not let me see my favorite cities without my api key" do
       city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
       user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
-      UserCity.create(user_id: user.id, city_id: city.id)
+      city_current = CurrentService.new(city).create_or_update
+      UserCity.create(user_id: user.id, city_id: city.id, city_current_id: city_current.id)
 
       get("/api/v1/favorites?api_key=67890")
 
