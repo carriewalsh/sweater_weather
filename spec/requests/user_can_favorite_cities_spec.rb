@@ -20,32 +20,29 @@ describe "As a logged-in user" do
       expect(UserCity.count).to eq(0)
       expect(response.status).to eq(401)
     end
-    #
-    # xit "lets me see my favorite cities" do
-    #   city = City.create(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123")
-    #   user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
-    #   expect(User.count).to eq(1)
-    #   user.cities << city
-    #
-    #   get('/api/v1/favorites?api_key="12345"')
-    #
-    #   expect(response.status).to eq(200)
-    #   data = JSON.parse(response.body).first
-    #   expect(data[:location]).to eq("Salem, Oregon")
-    #   # expect(data[:current]).to eq()
-    #   expect(user.cities.count).to eq(1)
-    # end
-    #
-    # it "does not let me see my favorite cities without my api key" do
-    #   city = City.create(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123")
-    #   user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
-    #   expect(User.count).to eq(1)
-    #   user.cities << city
-    #
-    #   get('/api/v1/favorites?api_key="67890")
-    #
-    #   expect(response.status).to eq(401)
-    #   expect(user.cities.count).to eq(1)
-    # end
+
+    xit "lets me see my favorite cities" do
+      city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
+      user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
+      UserCity.create(user_id: user.id, city_id: city.id)
+
+      get('/api/v1/favorites?api_key=12345')
+
+      expect(response.status).to eq(200)
+      data = JSON.parse(response.body).first
+      expect(data[:location]).to eq("Salem, Oregon")
+      # expect(data[:current]).to eq()
+      expect(user.cities.count).to eq(1)
+    end
+
+    it "does not let me see my favorite cities without my api key" do
+      city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
+      user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
+      UserCity.create(user_id: user.id, city_id: city.id)
+
+      get("/api/v1/favorites?api_key=67890")
+
+      expect(response.status).to eq(401)
+    end
   end
 end
