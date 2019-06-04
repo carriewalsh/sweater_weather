@@ -6,16 +6,10 @@ class Api::V1::SessionsController < ApplicationController
     if @user && @user.authenticate(user_params[:password])
       session[:user_id] = @user.id
       render json: {
-        status: 200,
-        body: {
-          "api_key": @user.api_key
-        }
-      }
+            "api_key": @user.api_key
+          }
     else
-      render json: {
-        error: "Forbidden",
-        status: 403
-      }
+      render :json => { :errors => "Forbidden" }, :status => 403
     end
   end
 
