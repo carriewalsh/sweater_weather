@@ -1,9 +1,9 @@
 class Api::V1::SessionsController < ApplicationController
   protect_from_forgery with: :null_session
-  
+
   def create
     @user = User.find_by(email: user_params[:email])
-    if @user && @user.authenticate
+    if @user && @user.authenticate(user_params[:password])
       session[:user_id] = @user.id
       render json: {
         status: 200,
