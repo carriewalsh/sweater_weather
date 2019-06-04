@@ -45,5 +45,27 @@ describe "As a logged-in user" do
 
       expect(response.status).to eq(401)
     end
+
+    xit "allows me to destroy a no-longer-favorite city" do
+      city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
+      user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
+      UserCity.create(user_id: user.id, city_id: city.id)
+
+      delete("/api/v1/favorites?location=#{city.id}&api_key=12345")
+
+      expect(response.status).to eq(200)
+      expect(UserCity.count).to eq(0)
+    end
+
+    xit "doesn't allow me to destroy a no-longer-favorite city without my api key" do
+      city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
+      user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
+      UserCity.create(user_id: user.id, city_id: city.id)
+
+      delete("/api/v1/favorites?location=#{city.id}&api_key=67890")
+
+      expect(response.status).to eq(401)
+      expect(UserCity.count).to eq(1)
+    end
   end
 end
