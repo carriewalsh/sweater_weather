@@ -5,7 +5,7 @@ describe CityDayService, type: :service do
     @city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: 44.07, longitude: -123)
     @city_day_service = CityDayService.new(@city)
 
-    @data = @city_day_service.get_json[:daily][:data][0,7]
+    @data = @city_day_service.get_json[:daily][:data][1,7]
   end
 
   describe "instance methods" do
@@ -41,7 +41,7 @@ describe CityDayService, type: :service do
       it "updates city_days if they do exist" do
         today = Date.today
         count = 0
-        while count < 7
+        while count < 14
           day = (today + count.days)
           Day.create(name: day.strftime("%A"), abbreviation: day.strftime("%a"), date: day)
           CityDay.create(city_id: @city.id, day_id: Day.find_by(date: day).id,
@@ -52,14 +52,15 @@ describe CityDayService, type: :service do
           summary: "blah")
           count += 1
         end
-        expect(CityDay.count).to eq(7)
+        expect(CityDay.count).to eq(14)
         expect(CityDay.first.low).to eq(2.2)
         expect(CityDay.last.low).to eq(2.2)
 
-        @city_day_service.create_or_update
-        expect(CityDay.count).to eq(7)
-        expect(CityDay.first.low).to eq(@data.first[:temperatureMin])
-        expect(CityDay.last.low).to eq(@data[6][:temperatureMin])
+        binding.pry
+        CityDayService.new(@city).create_or_update
+        expect(CityDay.count).to eq(14)
+        expect(CityDay.first.low).to eq(@data[7][:temperatureMin])
+        expect(CityDay.last.low).to eq(@data[13][:temperatureMin])
       end
     end
   end

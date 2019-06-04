@@ -8,10 +8,11 @@ class CityDayService
   end
 
   def get_forecast
-    get_json[:daily][:data][0,7]
+    get_json[:daily][:data][1,7]
   end
 
   def create_or_update
+    binding.pry
     days = CityDay.where(city_id: @city.id)
     unless days.empty?
       data = get_forecast
