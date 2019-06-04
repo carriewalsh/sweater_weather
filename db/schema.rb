@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_005142) do
+ActiveRecord::Schema.define(version: 2019_06_04_012123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,12 +90,12 @@ ActiveRecord::Schema.define(version: 2019_06_04_005142) do
 
   create_table "photos", force: :cascade do |t|
     t.bigint "city_id"
-    t.string "owner"
     t.string "secret"
     t.string "server"
     t.string "title"
     t.string "farm"
     t.string "url"
+    t.string "photo_id"
     t.index ["city_id"], name: "index_photos_on_city_id"
   end
 

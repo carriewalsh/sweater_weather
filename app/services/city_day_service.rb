@@ -12,7 +12,6 @@ class CityDayService
   end
 
   def create_or_update
-    binding.pry
     days = CityDay.where(city_id: @city.id)
     unless days.empty?
       data = get_forecast

@@ -24,7 +24,7 @@ class City < ApplicationRecord
                   secret: data[:secret],
                   server: data[:server],
                   title: data[:title],
-                  farm: data[:farm]),
-                  url: "https://farm#{data[:farm]}.staticflickr.com/#{data[:server]}/#{data[:id]}_#{secret: data[:secret]}.jpg"
+                  farm: data[:farm],
+                  url: "https://farm#{data[:farm]}.staticflickr.com/#{data[:server]}/#{data[:id]}_#{data[:secret]}.jpg")
   end
 end
