@@ -12,4 +12,5 @@ class CityCurrent < ApplicationRecord
 
   belongs_to :city
   has_one :antipode
+  has_many :user_cities
 end
