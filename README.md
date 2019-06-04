@@ -12,4 +12,4 @@ rake update:day #adds one day 14 days from now - nightly
 rake update:currents #updates current for every city or creates one for new city - 10 minutely
 
 scheduled destroys
-rake destroy:data - #destroys days,citydays,citysteadies older than 21 days - nigthly
+rake destroy:data - #destroys days, citydays, citysteadies older than 21 days - nightly

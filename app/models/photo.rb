@@ -1,5 +1,5 @@
 class Photo < ApplicationRecord
-  validates_presence_of :owner,
+  validates_presence_of :photo_id,
                         :secret,
                         :server,
                         :title,

@@ -6,7 +6,7 @@ describe Photo, type: :model do
   end
 
   describe "Validations" do
-    it { should validate_presence_of :owner }
+    it { should validate_presence_of :photo_id }
     it { should validate_presence_of :secret }
     it { should validate_presence_of :server }
     it { should validate_presence_of :title }

@@ -19,6 +19,12 @@ class City < ApplicationRecord
 
   def add_photo
     data = PhotoService.new(self).get_photo
-    Photo.create(city_id: self.id, owner: data[:owner], secret: data[:secret], server: data[:server], title: data[:title])
+    Photo.create( city_id: self.id,
+                  photo_id: data[:id],
+                  secret: data[:secret],
+                  server: data[:server],
+                  title: data[:title],
+                  farm: data[:farm]),
+                  url: "https://farm#{data[:farm]}.staticflickr.com/#{data[:server]}/#{data[:id]}_#{secret: data[:secret]}.jpg"
   end
 end
