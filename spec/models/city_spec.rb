@@ -6,18 +6,19 @@ describe City, type: :model do
     it { should have_many :city_steadies }
     it { should have_one :city_current }
     it { should have_one :photo }
+    it { should have_one :antipode }
   end
 
   describe "Validations" do
     it { should validate_presence_of :name }
-    it { should validate_presence_of :state }
+    it { should validate_presence_of :country }
     it { should validate_presence_of :latitude }
     it { should validate_presence_of :longitude }
   end
 
   describe "Instance methods" do
     before :each do
-      @city = City.create(name: "Salem", state: "Oregon", latitude: "44.07", longitude: "-123")
+      @city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
     end
 
     describe "coordinates" do

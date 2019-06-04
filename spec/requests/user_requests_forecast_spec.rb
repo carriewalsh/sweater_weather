@@ -6,7 +6,7 @@ describe "As a user" do
       it "returns lots of fun weather information for a location" do
         today = Date.today
         count = 0
-        while count < 7
+        while count < 14
           day = (today + count.days)
           Day.create(name: day.strftime("%A"), abbreviation: day.strftime("%a"), date: day)
           count += 1
@@ -22,7 +22,6 @@ describe "As a user" do
         expect(City.first.name).to eq("Salem")
         expect(City.first.state).to eq("Oregon")
         expect(CityCurrent.count).to eq(1)
-        binding.pry
         expect(CityDay.count).to eq(7)
         expect(CitySteady.count).to eq(7)
       end

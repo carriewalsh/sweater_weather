@@ -6,11 +6,15 @@ Rails.application.routes.draw do
       get '/forecast', to: 'forecasts#show'
       get '/background', to: 'backgrounds#show'
 
+      get '/antipode', to: 'antipodes#show'
+
       post '/users', to: 'users#create'
 
       post '/sessions', to: 'sessions#create'
-      # post '/login', to: 'sessions#create'
-      # post '/logout', to: 'sessions#destroy', as: logout
+
+      post '/favorites', to: 'favorites#create'
+      get '/favorites', to: 'favorites#show'
+      delete '/favorites', to: 'favorites#destroy'
     end
   end
 end

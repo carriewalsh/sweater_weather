@@ -1,6 +1,6 @@
 class Api::V1::BackgroundsController < ApplicationController
   def show
-    city = CityCreatorService.new(city_params).find_or_create_city
+    city = CityCreatorService.new(city_params[:location]).find_or_create_city
     render json: CitySerializer.new(city, {
       include: [:photo]
       })

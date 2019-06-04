@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_224903) do
+ActiveRecord::Schema.define(version: 2019_06_04_044020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "antipodes", force: :cascade do |t|
+    t.bigint "city_id"
+    t.string "search_location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "city_current_id"
+    t.index ["city_current_id"], name: "index_antipodes_on_city_current_id"
+    t.index ["city_id"], name: "index_antipodes_on_city_id"
+  end
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
@@ -22,6 +32,7 @@ ActiveRecord::Schema.define(version: 2019_06_02_224903) do
     t.datetime "updated_at", null: false
     t.string "latitude"
     t.string "longitude"
+    t.string "country"
   end
 
   create_table "city_currents", force: :cascade do |t|
@@ -79,10 +90,12 @@ ActiveRecord::Schema.define(version: 2019_06_02_224903) do
 
   create_table "photos", force: :cascade do |t|
     t.bigint "city_id"
-    t.string "owner"
     t.string "secret"
     t.string "server"
     t.string "title"
+    t.string "farm"
+    t.string "url"
+    t.string "photo_id"
     t.index ["city_id"], name: "index_photos_on_city_id"
   end
 
@@ -91,6 +104,8 @@ ActiveRecord::Schema.define(version: 2019_06_02_224903) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "city_current_id"
+    t.index ["city_current_id"], name: "index_user_cities_on_city_current_id"
     t.index ["city_id"], name: "index_user_cities_on_city_id"
     t.index ["user_id"], name: "index_user_cities_on_user_id"
   end
@@ -103,6 +118,7 @@ ActiveRecord::Schema.define(version: 2019_06_02_224903) do
     t.string "api_key"
   end
 
+  add_foreign_key "antipodes", "cities"
   add_foreign_key "city_days", "cities"
   add_foreign_key "city_days", "days"
   add_foreign_key "city_steadies", "cities"
