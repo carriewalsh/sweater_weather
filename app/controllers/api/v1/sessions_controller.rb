@@ -7,9 +7,9 @@ class Api::V1::SessionsController < ApplicationController
       session[:user_id] = @user.id
       render json: {
             "api_key": @user.api_key
-          }
+          }, status: 200
     else
-      render :json => { :errors => "Forbidden" }, :status => 403
+      render :json => { :error => "Forbidden" }, status: 403
     end
   end
 
