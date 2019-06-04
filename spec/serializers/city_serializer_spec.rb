@@ -10,9 +10,10 @@ describe CitySerializer, type: :serializer do
         Day.create(name: day.strftime("%A"), abbreviation: day.strftime("%a"), date: day)
         count += 1
       end
-      city = City.create(name: "New York", state: "New York", latitude: "40.7127753", longitude: "-74.0059728")
+      city = City.create(name: "New York", state: "New York", country: "United States", latitude: "40.7127753", longitude: "-74.0059728")
       SteadyService.new(city).create_or_update
       CurrentService.new(city).create_or_update
+
       CityDayService.new(city).create_or_update
       serializer = CitySerializer.new(city, {
         include: [:city_steadies, :city_days, :city_current, :photo]
