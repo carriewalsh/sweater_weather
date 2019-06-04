@@ -53,22 +53,22 @@ You will need to set up 3 API keys and add them to config/application.yml:
 
 Run these after setting up the app:
 
-`$ rake import:cities #takes a minute - creates city and photo`
-`$ rake create:days #makes 14 days`
-`$ rake update:steadies`
-`$ rake update:city_days`
-`$ rake update:currents`
+- `$ rake import:cities #takes a minute - creates city and photo`
+- `$ rake create:days #makes 14 days`
+- `$ rake update:steadies`
+- `$ rake update:city_days`
+- `$ rake update:currents`
 
 Scheduled updates - for Heroku scheduled tasks:
 
-`rake update:steadies #updates 6 city_steadies per city and creates 1 - nightly`
-`rake update:city_days #updates 6 city_days per city and creates 1 - nightly`
-`rake update:day #adds one day 14 days from now - nightly`
-`rake update:currents #updates current for every city or creates one for new city - 10 minutely`
+- `rake update:steadies #updates 6 city_steadies per city and creates 1 - nightly`
+- `rake update:city_days #updates 6 city_days per city and creates 1 - nightly`
+- `rake update:day #adds one day 14 days from now - nightly`
+- `rake update:currents #updates current for every city or creates one for new city - 10 minutely`
 
 Scheduled destroys - for Heroku scheduled tasks:
 
-`rake destroy:data - #destroys days, city_days, and city_steadies older than 21 days - nightly`
+- `rake destroy:data - #destroys days, city_days, and city_steadies older than 21 days - nightly`
 
 ## Author
 
