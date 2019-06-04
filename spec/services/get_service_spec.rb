@@ -11,9 +11,9 @@ describe "GetService", type: :module do
 
     describe "conn and get_json" do
       it "should successfully send a get request with a given url and parse it" do
-        astronomy_body = @steady_service.get_json
-        forecast_body = @city_day_service.get_json
-        current_body = @current_service.get_json
+        astronomy_body = @steady_service.get_json(nil,nil)
+        forecast_body = @city_day_service.get_json(nil,nil)
+        current_body = @current_service.get_json(nil,nil)
 
         astronomy_expected = astronomy_body[:astronomy][:astronomy].first
         expect(astronomy_expected).to be_a(Hash)

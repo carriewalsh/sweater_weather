@@ -8,7 +8,7 @@ class LatLongService
   end
 
   def get_lat_long
-    get_json[:results].first[:geometry][:location]
+    get_json(nil,nil)[:results].first[:geometry][:location]
   end
 
   def combine

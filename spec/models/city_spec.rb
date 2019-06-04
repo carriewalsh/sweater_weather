@@ -41,6 +41,11 @@ describe City, type: :model do
         @city.add_photo
         expect(City.first.photo).to_not eq(nil)
       end
+      it "returns default photo for city that doesn't return any photo" do
+        city = City.create(name: "s;difjados;ifjados;fjasdgo;iawetg", state: ";asdoifuaw;ebietjbasd;if", country: "awe'tpihaw4;ogeifuvah;sietuhabwet", latitude: "44.07", longitude: "-123")
+        result = city.add_photo
+        expect(result.url).to eq("http://unisci24.com/data_images/wlls/53/355489-vague.jpg")
+      end
     end
   end
 end

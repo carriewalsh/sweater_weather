@@ -5,7 +5,7 @@ describe CityDayService, type: :service do
     @city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: 44.07, longitude: -123)
     @city_day_service = CityDayService.new(@city)
 
-    @data = @city_day_service.get_json[:daily][:data][1,7]
+    @data = @city_day_service.get_json(nil,nil)[:daily][:data][1,7]
   end
 
   describe "instance methods" do

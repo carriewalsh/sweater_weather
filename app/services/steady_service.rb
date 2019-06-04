@@ -8,7 +8,7 @@ class SteadyService
   end
 
   def get_astros
-    get_json[:astronomy][:astronomy][0,7]
+    get_json(nil,nil)[:astronomy][:astronomy][0,7]
   end
 
   def create_or_update

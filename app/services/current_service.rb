@@ -8,7 +8,7 @@ class CurrentService
   end
 
   def get_current
-    get_json[:currently]
+    get_json(nil,nil)[:currently]
   end
 
   def create_or_update

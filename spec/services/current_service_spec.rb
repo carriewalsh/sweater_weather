@@ -5,7 +5,7 @@ describe CurrentService, type: :service do
     @city = City.create!(name: "Salem", state: "Oregon", country: "United States", latitude: 44.07, longitude: -123)
     @current_service = CurrentService.new(@city)
 
-    @data = @current_service.get_json[:currently]
+    @data = @current_service.get_json(nil,nil)[:currently]
   end
 
   describe "Instance methods" do

@@ -4,7 +4,7 @@ describe LatLongService, type: :service do
   before :each do
     @city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: 44.07, longitude: -123)
     @lat_long_service = LatLongService.new(@city.name + ' ' + @city.state)
-    data = @lat_long_service.get_json[:results].first[:geometry][:location]
+    data = @lat_long_service.get_json(nil,nil)[:results].first[:geometry][:location]
     @lat = data[:lat]
     @long = data[:lng]
   end

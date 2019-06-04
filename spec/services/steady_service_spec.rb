@@ -4,7 +4,7 @@ describe SteadyService, type: :service do
   before :each do
     @city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: 44.07, longitude: -123)
     @steady_service = SteadyService.new(@city)
-    @data = @steady_service.get_json[:astronomy][:astronomy][0,7]
+    @data = @steady_service.get_json(nil,nil)[:astronomy][:astronomy][0,7]
   end
 
   describe 'Instance methods' do
