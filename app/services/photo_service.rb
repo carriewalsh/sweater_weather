@@ -8,6 +8,7 @@ class PhotoService
   end
 
   def get_photo
-    get_json[:photos][:photo].first
+    if get_json[:photos][:photo].first
+    end
   end
 end

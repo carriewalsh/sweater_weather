@@ -19,12 +19,22 @@ class City < ApplicationRecord
 
   def add_photo
     data = PhotoService.new(self).get_photo
-    Photo.create( city_id: self.id,
-                  photo_id: data[:id],
-                  secret: data[:secret],
-                  server: data[:server],
-                  title: data[:title],
-                  farm: data[:farm],
-                  url: "https://farm#{data[:farm]}.staticflickr.com/#{data[:server]}/#{data[:id]}_#{data[:secret]}.jpg")
+    if data
+      Photo.create( city_id: self.id,
+        photo_id: data[:id],
+        secret: data[:secret],
+        server: data[:server],
+        title: data[:title],
+        farm: data[:farm],
+        url: "https://farm#{data[:farm]}.staticflickr.com/#{data[:server]}/#{data[:id]}_#{data[:secret]}.jpg")
+    else
+      Photo.create( city_id: self.id,
+        photo_id: "no photo",
+        secret: "no photo",
+        server: "no photo",
+        title: "no photo",
+        farm: "no photo",
+        url: "http://unisci24.com/data_images/wlls/53/355489-vague.jpg")
+    end
   end
 end
