@@ -25,7 +25,7 @@ describe CityDayService, type: :service do
       it "creates city_days if they don't exist" do
         today = Date.today
         count = 0
-        while count < 7
+        while count < 14
           day = (today + count.days)
           Day.create(name: day.strftime("%A"), abbreviation: day.strftime("%a"), date: day)
           count += 1
@@ -56,7 +56,7 @@ describe CityDayService, type: :service do
         expect(CityDay.first.low).to eq(2.2)
         expect(CityDay.last.low).to eq(2.2)
         CityDayService.new(@city).create_or_update
-        
+
         expect(CityDay.count).to eq(14)
         expect(CityDay.fifth.summary).to_not eq("blah")
       end
