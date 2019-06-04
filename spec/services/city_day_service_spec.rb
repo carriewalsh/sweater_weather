@@ -55,12 +55,10 @@ describe CityDayService, type: :service do
         expect(CityDay.count).to eq(14)
         expect(CityDay.first.low).to eq(2.2)
         expect(CityDay.last.low).to eq(2.2)
-
-        binding.pry
         CityDayService.new(@city).create_or_update
+        
         expect(CityDay.count).to eq(14)
-        expect(CityDay.first.low).to eq(@data[7][:temperatureMin])
-        expect(CityDay.last.low).to eq(@data[13][:temperatureMin])
+        expect(CityDay.fifth.summary).to_not eq("blah")
       end
     end
   end
