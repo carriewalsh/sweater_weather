@@ -2,7 +2,14 @@ class Api::V1::FavoritesController < ApplicationController
   protect_from_forgery with: :null_session
 
   def create
-
+    user = User.find_by(api_key: create_params[:api_key])
+    city = City.find(create_params[:location])
+    if user && city
+      UserCity.create(user_id: user.id, city_id: city.id)
+      render json: { success: "Favorited" }, status: 200
+    else
+      render json: { error: "Forbidden" }, status: 403
+    end
   end
 
   def show
@@ -12,4 +19,10 @@ class Api::V1::FavoritesController < ApplicationController
   def destroy
 
   end
+
+  private
+
+    def create_params
+      params.permit(:location, :api_key)
+    end
 end
