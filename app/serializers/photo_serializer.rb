@@ -4,7 +4,8 @@ class PhotoSerializer
               :photo_id,
               :secret,
               :server,
-              :title
+              :title,
+              :url
 
   # belongs_to :city
 end
