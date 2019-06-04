@@ -1,7 +1,7 @@
 class PhotoSerializer
   include FastJsonapi::ObjectSerializer
   attributes  :id,
-              :owner,
+              :photo_id,
               :secret,
               :server,
               :title
