@@ -65,15 +65,20 @@ describe "As a logged-in user" do
       expect(UserCity.count).to eq(1)
     end
 
-    xit "doesn't allow me to destroy a no-longer-favorite city without my api key" do
+    it "doesn't allow me to destroy a no-longer-favorite city without my api key" do
       city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
       user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
-      UserCity.create(user_id: user.id, city_id: city.id)
+      city2 = City.create(name: "Eugene", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
+      city_current = CurrentService.new(city).create_or_update
+      UserCity.create!(user_id: user.id, city_id: city.id, city_current_id: city_current.id)
+      city_current2 = CurrentService.new(city2).create_or_update
+      UserCity.create!(user_id: user.id, city_id: city2.id, city_current_id: city_current2.id)
+      expect(UserCity.count).to eq(2)
 
       delete("/api/v1/favorites?location=#{city.id}&api_key=67890")
 
       expect(response.status).to eq(401)
-      expect(UserCity.count).to eq(1)
+      expect(UserCity.count).to eq(2)
     end
   end
 end
