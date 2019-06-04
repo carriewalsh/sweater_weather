@@ -3,7 +3,7 @@ by Carrie Walsh
 
 Deployed site: https://serene-brook-41842.herokuapp.com
 
-This solo project is an APO that provides the json-ified weather data for a weather app (yet to be made). The fifty most populous cities are imported into the database and every time a new city is searched, that becomes a new data point. The weather data is separated into 3 tables:
+This solo project is an API that provides the json-ified weather data for a weather app (yet to be made). The fifty most populous cities are imported into the database and every time a new city is searched, that becomes a new data point. The weather data is separated into 3 tables:
 - CitySteadies - sunrise/sunset/moon_phase - as these do not change
 - CityDays - the forecasts for the next several days - only updated daily
 - CityCurrents - current forecast data for city - updated frequently
