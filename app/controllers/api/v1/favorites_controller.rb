@@ -15,16 +15,24 @@ class Api::V1::FavoritesController < ApplicationController
 
   def show
     user = User.find_by(api_key: create_params[:api_key])
-    # favorites = User.cities
+    favorites = user.cities
+    binding.pry
     if user
-      render json: UserCitySerializer.new(favorites)
+      render json: {
+        favorites: favorites.to_json, include: :city_currents
+      }
     else
       render json: { error: "Unauthorized" }, status: 401
     end
   end
 
   def destroy
-
+    user = User.find_by(api_key: create_params[:api_key])
+    favorites = user.cities
+    if user
+    else
+      render json: { error: "Unauthorized" }, status: 401
+    end
   end
 
   private

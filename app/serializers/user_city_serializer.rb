@@ -1,5 +1,8 @@
 class UserCitySerializer
-  include FastJsonapi::ObjectSerializer
+
+  def initialize(user_city)
+    
+  end
   attributes :id
 
   belongs_to :city

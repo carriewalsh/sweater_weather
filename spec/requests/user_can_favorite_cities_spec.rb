@@ -25,8 +25,8 @@ describe "As a logged-in user" do
     xit "lets me see my favorite cities" do
       city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
       user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
-      UserCity.create(user_id: user.id, city_id: city.id)
-
+      city_current = CurrentService.new(city).create_or_update
+      UserCity.create!(user_id: user.id, city_id: city.id, city_current_id: city_current.id)
       get('/api/v1/favorites?api_key=12345')
 
       expect(response.status).to eq(200)
@@ -46,7 +46,7 @@ describe "As a logged-in user" do
       expect(response.status).to eq(401)
     end
 
-    xit "allows me to destroy a no-longer-favorite city" do
+    it "allows me to destroy a no-longer-favorite city" do
       city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
       user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
       UserCity.create(user_id: user.id, city_id: city.id)
