@@ -8,7 +8,7 @@ class Api::V1::FavoritesController < ApplicationController
       UserCity.create(user_id: user.id, city_id: city.id)
       render json: { success: "Favorited" }, status: 200
     else
-      render json: { error: "Forbidden" }, status: 403
+      render json: { error: "Unauthorized" }, status: 401
     end
   end
 
