@@ -10,5 +10,7 @@ describe Photo, type: :model do
     it { should validate_presence_of :secret }
     it { should validate_presence_of :server }
     it { should validate_presence_of :title }
+    it { should validate_presence_of :farm }
+    it { should validate_presence_of :url }
   end
 end
