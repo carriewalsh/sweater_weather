@@ -8,7 +8,7 @@ class CityDayService
   end
 
   def get_forecast
-    get_json[:daily][:data][1,7]
+    get_json(nil,nil)[:daily][:data][1,7]
   end
 
   def create_or_update

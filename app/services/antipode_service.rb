@@ -25,6 +25,6 @@ class AntipodeService
   private
 
     def get_antipode
-      get_json_headers("api_key", ENV["AMY_KEY"])[:data]
+      get_json("api_key", ENV["AMY_KEY"])[:data]
     end
 end

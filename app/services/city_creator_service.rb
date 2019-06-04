@@ -26,7 +26,6 @@ class CityCreatorService
   private
 
     def get_city
-      data = get_json[:results].first[:address_components]
       city = nil
       data.map do |datum|
         if datum[:types].include?("locality")
@@ -43,7 +42,6 @@ class CityCreatorService
     end
 
     def get_state
-      data = get_json[:results].first[:address_components]
       state = nil
       data.map do |datum|
         if datum[:types].include?("administrative_area_level_1")
@@ -54,7 +52,6 @@ class CityCreatorService
     end
 
     def get_country
-      data = get_json[:results].first[:address_components]
       country = nil
       data.map do |datum|
         if datum[:types].include?("country")
@@ -62,5 +59,9 @@ class CityCreatorService
         end
       end
       country
+    end
+
+    def data
+      get_json(nil,nil)[:results].first[:address_components]
     end
 end
