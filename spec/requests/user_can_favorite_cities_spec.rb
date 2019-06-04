@@ -22,21 +22,25 @@ describe "As a logged-in user" do
       expect(response.status).to eq(401)
     end
 
-    xit "lets me see my favorite cities" do
+    it "lets me see my favorite cities" do
       city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
+      city2 = City.create(name: "Eugene", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
       user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
       city_current = CurrentService.new(city).create_or_update
       UserCity.create!(user_id: user.id, city_id: city.id, city_current_id: city_current.id)
+      city_current2 = CurrentService.new(city2).create_or_update
+      UserCity.create!(user_id: user.id, city_id: city2.id, city_current_id: city_current2.id)
       get('/api/v1/favorites?api_key=12345')
 
       expect(response.status).to eq(200)
-      data = JSON.parse(response.body).first
+      data = JSON.parse(response.body, symbolize_names: true).first
+      binding.pry
       expect(data[:location]).to eq("Salem, Oregon")
       # expect(data[:current]).to eq()
       expect(user.cities.count).to eq(1)
     end
 
-    it "does not let me see my favorite cities without my api key" do
+    xit "does not let me see my favorite cities without my api key" do
       city = City.create(name: "Salem", state: "Oregon", country: "United States", latitude: "44.07", longitude: "-123")
       user = User.create(email: "example@gob.com", password: "password", api_key: "12345")
       UserCity.create(user_id: user.id, city_id: city.id)
