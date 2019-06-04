@@ -7,10 +7,10 @@ describe "As a visitor", type: :request do
 
       # expect(response).to be successful
       body = JSON.parse(response.body, symbolize_names: true)
-
-      expect(body[:data].first[:type]).to eq("antipode")
-      expect(body[:data].first[:attributes].include?("search_location")).to be true
-      expect(body[:data].first[:attributes].include?("forecast")).to be true
+      expect(body[:data][:type]).to eq("antipode")
+      expect(body[:data][:attributes].include?(:search_location)).to be true
+      expect(body[:included].second[:type]).to eq("city_current")
+      expect(body[:included].second[:attributes].include?(:temp)).to be true
     end
   end
 
