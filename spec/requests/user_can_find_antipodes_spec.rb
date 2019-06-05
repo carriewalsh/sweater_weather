@@ -12,6 +12,12 @@ describe "As a visitor", type: :request do
       expect(body[:included].second[:type]).to eq("city_current")
       expect(body[:included].second[:attributes].include?(:temp)).to be true
     end
+
+    it "returns a message if antipode cannot be found" do
+      get "/api/v1/antipode?loc=salem,oregon"
+      body = JSON.parse(response.body, symbolize_names: true)
+      expect(body[:message]).to eq("Antipode cannot be found")
+    end
   end
 
   describe "amypode" do
