@@ -1,7 +1,6 @@
 class Api::V1::ForecastsController < ApplicationController
   def show
-    city = CityCreatorService.new(city_params[:location])
-    city.find_or_create
+    city = CityCreatorService.new(city_params[:location]).find_or_create
     if city.city_steadies.empty?
       CurrentService.new(city).create_or_update
       CityDayService.new(city).create_or_update
