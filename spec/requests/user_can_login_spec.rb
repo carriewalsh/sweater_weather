@@ -21,5 +21,11 @@ describe "As a user" do
 
       expect(response.status).to eq(403)
     end
+
+    it "does not allow me to log in if I don't exist" do
+      post('/api/v1/sessions?user[email]=example@gob.com&user[password]=not')
+
+      expect(response.status).to eq(403)
+    end
   end
 end
