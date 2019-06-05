@@ -6,7 +6,7 @@ describe "As a user" do
       it "returns a background for a location" do
         expect(City.count).to eq(0)
         expect(Photo.count).to eq(0)
-        get "/api/v1/background?location=#{"Salem Oregon"}"
+        get "/api/v1/backgrounds?location=#{"Salem Oregon"}"
         expect(response).to be_successful
         expect(City.count).to eq(1)
         expect(Photo.count).to eq(1)

@@ -17,6 +17,7 @@ describe CityCreatorService, type: :service do
 
         new_input = "Salem, OR"
         new_city_creator_service = CityCreatorService.new(new_input)
+        new_city_creator_service.find_or_create
         expect(City.count).to eq(1)
         expect(City.first.name).to eq("Salem")
         expect(City.first.state).to eq("Oregon")
