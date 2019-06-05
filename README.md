@@ -70,6 +70,10 @@ Scheduled destroys - for Heroku scheduled tasks:
 
 - `rake destroy:data - #destroys days, city_days, and city_steadies older than 21 days - nightly`
 
+## Schema
+
+![Sweater Weather Schema](/schema.jpg?raw=true "Sweater Weather Schema")
+
 ## Antipode Functionality
 
 This app is also set up to create antipodes (cities directly opposite each other on the globe).
