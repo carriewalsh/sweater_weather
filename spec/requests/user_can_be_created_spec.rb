@@ -17,5 +17,10 @@ describe "As a visitor" do
       expect(User.count).to eq(1)
       expect(response.status).to eq(409)
     end
+
+    it "throws an error if password confirmation is wrong" do
+      post "/api/v1/users?email=example@gob.com&pasdfsadfsword_confirmation=password"
+      expect(response.status).to eq(400)
+    end
   end
 end
