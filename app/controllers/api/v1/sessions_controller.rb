@@ -8,8 +8,12 @@ class Api::V1::SessionsController < ApplicationController
       render json: {
             "api_key": @user.api_key
           }, status: 200
-    else
+    elsif !@user.authenticalte(user_params[:password])
       render :json => { :error => "Forbidden" }, status: 403
+    elsif !@user
+      render :json => { :error => "Forbidden" }, status: 403
+    else
+      render :json => { :error => "Bad Request" }, status: 400
     end
   end
 
