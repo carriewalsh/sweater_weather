@@ -77,7 +77,7 @@ This app is also set up to create antipodes (cities directly opposite each other
 This utilizes the AmyPode API found at: `http://amypode.herokuapp.com/api/v1/antipodes?lat=27&long=-82`
 
 - api_key defined within `ENV[AMY_KEY]`
-- within the header `api_key` = `oscar_the_grouch`
+- within the header `api_key`
 
 ### Endpoint
 
