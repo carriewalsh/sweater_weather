@@ -72,7 +72,7 @@ Scheduled destroys - for Heroku scheduled tasks:
 
 ## Schema
 
-![Sweater Weather Schema](/schema.jpg?raw=true "Sweater Weather Schema")
+![Sweater Weather Schema](/schema.png?raw=true "Sweater Weather Schema")
 
 ## Antipode Functionality
 
