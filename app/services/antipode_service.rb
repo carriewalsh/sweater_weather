@@ -11,12 +11,14 @@ class AntipodeService
   end
 
   def create_antipode
-    antipode_city = create_or_find_city
-    CurrentService.new(antipode_city).create_or_update
-    Antipode.create(search_location: @city.name, city_id: antipode_city.id, city_current_id: antipode_city.city_current.id)
+    antipode_city = find_or_create
+    if antipode_city
+      CurrentService.new(antipode_city).create_or_update
+      Antipode.create(search_location: @city.name, city_id: antipode_city.id, city_current_id: antipode_city.city_current.id)
+    end
   end
 
-  def create_or_find_city
+  def find_or_create
     data = get_antipode[:attributes]
     latlong = "#{data[:lat]},#{data[:long]}"
     CityCreatorService.new(latlong).find_or_create

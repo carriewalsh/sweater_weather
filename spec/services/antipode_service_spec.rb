@@ -2,9 +2,9 @@ require "rails_helper"
 
 describe AntipodeService, type: :service do
   describe "instance methods" do
-    describe "create_or_find_city" do
+    describe "find_or_create" do
       it "creates antipode city" do
-        AntipodeService.new("hongkong").create_or_find_city
+        AntipodeService.new("hongkong").find_or_create
         expect(City.count).to eq(2)
         expect(City.last.name).to eq("Jujuy")
         expect(City.last.country).to eq("Argentina")

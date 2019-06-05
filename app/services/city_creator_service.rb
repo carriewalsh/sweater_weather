@@ -16,11 +16,12 @@ class CityCreatorService
     city = get_city
     state = get_state
     country = get_country
-    if City.where(name: city, state: state).empty?
+    if City.where(name: city, state: state, country: country).first
+      City.where(name: city, state: state, country: country).first
+    elsif City.where(name: city, state: state).empty? && country
       City.create!(name: city, state: state, country: country, latitude: @latlong.split(",")[0], longitude: @latlong.split(",")[1])
       City.where(name: city, state: state, country: country).first.add_photo
     end
-    City.where(name: city, state: state, country: country).first
   end
 
   private
