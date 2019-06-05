@@ -4,7 +4,7 @@ class AntipodeService
 
   def initialize(input)
     @input = input
-    @city = CityCreatorService.new(input).find_or_create_city
+    @city = CityCreatorService.new(input).find_or_create
     lat = @city.latitude
     long = @city.longitude
     @url = "http://amypode.herokuapp.com/api/v1/antipodes?lat=#{lat}&long=#{long}"
@@ -19,7 +19,7 @@ class AntipodeService
   def create_or_find_city
     data = get_antipode[:attributes]
     latlong = "#{data[:lat]},#{data[:long]}"
-    CityCreatorService.new(latlong).find_or_create_city
+    CityCreatorService.new(latlong).find_or_create
   end
 
   private

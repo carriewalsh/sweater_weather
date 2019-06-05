@@ -35,7 +35,7 @@ describe CitySerializer, type: :serializer do
         Day.create(name: day.strftime("%A"), abbreviation: day.strftime("%a"), date: day)
         count += 1
       end
-      city = CityCreatorService.new("New York City New York").find_or_create_city
+      city = CityCreatorService.new("New York City New York").find_or_create
       serializer = CitySerializer.new(city, {
         include: [:city_steadies, :city_days, :city_current, :photo]
         })

@@ -12,7 +12,7 @@ class CityCreatorService
     @url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=#{@latlong}&key=#{ENV['GOOGLE_SECRET_KEY']}"
   end
 
-  def find_or_create_city
+  def find_or_create
     city = get_city
     state = get_state
     country = get_country

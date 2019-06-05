@@ -16,7 +16,7 @@ describe "As a visitor", type: :request do
 
   describe "amypode" do
     it "returns the lat and long of the antipode" do
-      city = CityCreatorService.new("hongkong").find_or_create_city
+      city = CityCreatorService.new("hongkong").find_or_create
       lat = city.latitude
       long = city.longitude
 
