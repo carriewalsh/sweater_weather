@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
   protect_from_forgery with: :null_session
 
   def create
-    if user_params.password == user_params.password_confirmation
+    if user_params[:password] == user_params[:password_confirmation]
       @user = User.create(user_params)
       if @user.save
         @user.update(api_key: SecureRandom.hex(2))
