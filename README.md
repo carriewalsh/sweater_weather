@@ -13,12 +13,13 @@ It provides the database for users to be registered as well as create, view, and
 ## Endpoints
 
 - GET `/api/v1/forecast?location=CITYNAME`
-request:
+
+Request:
 ```javascript
 Content-Type: application/json
 Accept: application/json
 ```
-response:
+Response:
 ```javascript
 {
     "city": {
@@ -111,12 +112,13 @@ response:
 }
 ```
 - GET `/api/v1/backgrounds?location=CITYNAME`
-request:
+
+Request:
 ```javascript
 Content-Type: application/json
 Accept: application/json
 ```
-response:
+Response:
 ```javascript
 {
     "data": {
@@ -142,31 +144,34 @@ response:
 }
 ```
 - POST `/api/v1/users?email=EXAMPLE@EXAMPLE.COM&password=PASSWORD&password_confirmation=PASSWORD`
-request:
+
+Request:
 ```javascript
 Content-Type: application/json
 Accept: application/json
 ```
-response:
+Response:
 ```javascript
 {
     "api_key": "b9a5"
 }
 ```
 - POST `/api/v1/sessions?user[email]=EXAMPLE@EXAMPLE.COM&user[password]=PASSWORD`
-request:
+
+Request:
 ```javascript
 Content-Type: application/json
 Accept: application/json
 ```
-response:
+Response:
 ```javascript
 {
     "api_key": "b9a5"
 }
 ```
 - POST `/api/v1/favorites?location=CITY_ID`
-request:
+
+Request:
 ```javascript
 Content-Type: application/json
 Accept: application/json
@@ -174,14 +179,15 @@ Accept: application/json
     "api_key": "b9a5"
 }
 ```
-response:
+Response:
 ```javascript
 {
     "success": "Arlington, Texas has been favorited."
 }
 ```
 - GET `/api/v1/favorites`
-request:
+
+Request:
 ```javascript
 Content-Type: application/json
 Accept: application/json
@@ -189,7 +195,7 @@ Accept: application/json
     "api_key": "b9a5"
 }
 ```
-response:
+Response:
 ```javascript
 {
     "test@example.com": {
@@ -217,7 +223,8 @@ response:
 }
 ```
 - DELETE `/api/v1/favorites?api_key=USER_API_KEY&location=CITY_ID`
-request:
+
+Request:
 ```javascript
 Content-Type: application/json
 Accept: application/json
@@ -225,7 +232,7 @@ Accept: application/json
     "api_key": "b9a5"
 }
 ```
-response:
+Response:
 ```javascript
 {
     "success": "New York, New York has been removed from favorites"
@@ -298,7 +305,7 @@ This utilizes the AmyPode API found at: `http://amypode.herokuapp.com/api/v1/ant
 ### Endpoint
 
 - GET `/api/v1/antipode?loc=CITYNAME`
-request:
+Request:
 ```javascript
 Content-Type: application/json
 Accept: application/json
@@ -306,7 +313,7 @@ Accept: application/json
     "api_key": "b9a5"
 }
 ```
-response:
+Response:
 ```javascript
 {
     "data": {
@@ -389,3 +396,5 @@ response:
 ## Author
 
 At the time of this project, I am in my final week of Mod 3 at Turing School of Software & Design.
+
+https://alumni.turing.io/alumni/carrie-walsh
